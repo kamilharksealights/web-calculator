@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.sealights</groupId>
+    <artifactId>web-calculator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>core</module>
+        <module>web-adding</module>
+        <module>web-subtracting</module>
+        <module>integration-tests</module>
+    </modules>
+    <packaging>pom</packaging>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.sealights.on-premise.agents.plugin</groupId>
+                <artifactId>sealights-maven-plugin</artifactId>
+                <version>2.1.660</version>
+                <configuration>
+                    <token>
+                        eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL0RFVi1rYW1pbC5hdXRoLnNlYWxpZ2h0cy5pby8iLCJqd3RpZCI6IkRFVi1rYW1pbCxpLTA2NTk2NTFjNTQ1ODFlNDUxLEFQSUdXLWFjMWU3ZWY5LWVhNzAtNGQ0Ny05OWVjLWI2MWU0MzQzNDgyMywxNTg0NzgwNDE2OTk5Iiwic3ViamVjdCI6IlNlYUxpZ2h0c0BhZ2VudCIsImF1ZGllbmNlIjpbImFnZW50cyJdLCJ4LXNsLXJvbGUiOiJhZ2VudCIsIngtc2wtc2VydmVyIjoiaHR0cHM6Ly9kZXYta2FtaWwtZ3cuZGV2LnNlYWxpZ2h0cy5jby9hcGkiLCJzbF9pbXBlcl9zdWJqZWN0IjoiIiwiaWF0IjoxNTg0NzgwNDE3fQ.VgoykxGnyC2NfvOF3pTaweGSIcrOw4dnQn2KCfPXnrLzkv4OxG_oPNZCqovhtNpLcKlKUiwTmN5XGdlDcNcTQndHHASdjM06Sg5bOwXJ5bOegslzp-0uGHiWWNHj5jT-F29YuNQJyKkrj-NRkAKGkCXhDN6XOmVuz3y_xFVOj7jSlFb9OHZNekQEstQAtrO63vqW8wDX0HId-UXjxWGeo5EcRVbKj51iIVOIuE-bys_h23eq81eZr-WV7VdM3OwC8gF5jRxGvAT3bgNmgbNgAPLAs6wl4xmqMg8iPP6uYURFn-4kF85hJge4WHoAPEGEwdm4W9jTxWO6S0jtIggOwiPMdW3ARRSGJl54mqlU5HPGIwNfGhzKcIZQG2ta1XG9exUPOJHKuo_ie1lYl3TY2N3dxa7lebWT1RGbTag8mMgbxwwmaMKalK9OKK8hUYn88gnDwKYDxEGXt6JTBsqTvafC3KOemmodYn532hG6bjLOh6QDcSX6oeRmFCRIZKXaAuPyULz0-bg8SEFAlXyaXe1ZQfg_0xreCb6J3U6DVBLf9tchZepSeH9ATayfaMheV_KtqvttwIRSHg7lrz_5xm3CprCYK7lMwZgfQHUDBEReCIBRz-dkqO5Sexcj_KhhDAgMYSO5Uh859ehg-1Up5gyEdL6Vi0dInOeyDhRDl24
+                    </token>
+                    <createBuildSessionId>true</createBuildSessionId>
+                    <appName>sl-web-calculator2</appName>
+                    <workspacepath>${project.build.outputDirectory}</workspacepath>
+                    <build>${sl.build}</build>
+                    <branch>master</branch>
+                    <packagesincluded>io.sl.*</packagesincluded>
+                    <filesincluded>*.class</filesincluded>
+                    <filesStorage>/tmp</filesStorage>
+                    <testStage>Unit Tests</testStage>
+                    <filesexcluded>*test-classes*</filesexcluded>
+                    <logLevel>WARN</logLevel>
+                    <logFolder>/tmp</logFolder>
+                    <includeResources>true</includeResources>
+                    <testListenerJar>/home/kamil/workspace/sealights/projects/web-calculator/sl-test-listener.jar
+                    </testListenerJar>
+                    <buildScannerJar>/home/kamil/workspace/sealights/projects/web-calculator/sl-build-scanner.jar
+                    </buildScannerJar>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>a1</id>
+                        <goals>
+                            <goal>build-scanner</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>a2</id>
+                        <goals>
+                            <goal>test-listener</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>a3</id>
+                        <goals>
+                            <goal>prepare-test-listener</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <argLine>@{sealightsArgLine} -Dsl.testStage="Integration Tests" -Dsl.tia.useModuleName=true</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
