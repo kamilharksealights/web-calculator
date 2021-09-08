@@ -5,7 +5,7 @@
 
     <groupId>io.sealights</groupId>
     <artifactId>web-calculator</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <modules>
         <module>core</module>
         <module>web-adding</module>
@@ -14,6 +14,10 @@
     </modules>
     <packaging>pom</packaging>
 
+        <properties>
+            <maven.compiler.source>1.8</maven.compiler.source>
+            <maven.compiler.target>1.8</maven.compiler.target>
+        </properties>
 
     <build>
         <plugins>
@@ -23,10 +27,10 @@
                 <version>2.1.660</version>
                 <configuration>
                     <token>
-                        eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL0RFVi1rYW1pbC5hdXRoLnNlYWxpZ2h0cy5pby8iLCJqd3RpZCI6IkRFVi1rYW1pbCxpLTA2NTk2NTFjNTQ1ODFlNDUxLEFQSUdXLWFjMWU3ZWY5LWVhNzAtNGQ0Ny05OWVjLWI2MWU0MzQzNDgyMywxNTg0NzgwNDE2OTk5Iiwic3ViamVjdCI6IlNlYUxpZ2h0c0BhZ2VudCIsImF1ZGllbmNlIjpbImFnZW50cyJdLCJ4LXNsLXJvbGUiOiJhZ2VudCIsIngtc2wtc2VydmVyIjoiaHR0cHM6Ly9kZXYta2FtaWwtZ3cuZGV2LnNlYWxpZ2h0cy5jby9hcGkiLCJzbF9pbXBlcl9zdWJqZWN0IjoiIiwiaWF0IjoxNTg0NzgwNDE3fQ.VgoykxGnyC2NfvOF3pTaweGSIcrOw4dnQn2KCfPXnrLzkv4OxG_oPNZCqovhtNpLcKlKUiwTmN5XGdlDcNcTQndHHASdjM06Sg5bOwXJ5bOegslzp-0uGHiWWNHj5jT-F29YuNQJyKkrj-NRkAKGkCXhDN6XOmVuz3y_xFVOj7jSlFb9OHZNekQEstQAtrO63vqW8wDX0HId-UXjxWGeo5EcRVbKj51iIVOIuE-bys_h23eq81eZr-WV7VdM3OwC8gF5jRxGvAT3bgNmgbNgAPLAs6wl4xmqMg8iPP6uYURFn-4kF85hJge4WHoAPEGEwdm4W9jTxWO6S0jtIggOwiPMdW3ARRSGJl54mqlU5HPGIwNfGhzKcIZQG2ta1XG9exUPOJHKuo_ie1lYl3TY2N3dxa7lebWT1RGbTag8mMgbxwwmaMKalK9OKK8hUYn88gnDwKYDxEGXt6JTBsqTvafC3KOemmodYn532hG6bjLOh6QDcSX6oeRmFCRIZKXaAuPyULz0-bg8SEFAlXyaXe1ZQfg_0xreCb6J3U6DVBLf9tchZepSeH9ATayfaMheV_KtqvttwIRSHg7lrz_5xm3CprCYK7lMwZgfQHUDBEReCIBRz-dkqO5Sexcj_KhhDAgMYSO5Uh859ehg-1Up5gyEdL6Vi0dInOeyDhRDl24
+                        eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL0RFVi1rYW1pbC5hdXRoLnNlYWxpZ2h0cy5pby8iLCJqd3RpZCI6IkRFVi1rYW1pbCxpLTA1NTkxZWIzNmVlMmZkNzMyLEFQSUdXLTFjMDFmY2Y2LTM2ZjItNGNkZi1hNzUzLTQ2MzY4YjI3YTRhNCwxNjI5ODk0NTY4Mjk3Iiwic3ViamVjdCI6IlNlYUxpZ2h0c0BhZ2VudCIsImF1ZGllbmNlIjpbImFnZW50cyJdLCJ4LXNsLXJvbGUiOiJhZ2VudCIsIngtc2wtc2VydmVyIjoiaHR0cHM6Ly9ERVYta2FtaWwtZ3cuZGV2LnNlYWxpZ2h0cy5jby9hcGkiLCJzbF9pbXBlcl9zdWJqZWN0IjoiIiwiaWF0IjoxNjI5ODk0NTY4fQ.X3yhXM3dfzSAJokmlabLiLPm3HXf06VXNwGz1KleagzKM3jneH3Y0ChedXBHkqqhiONdDhVJs9-APnQs2b_j82Jj-9XcPOZ5N5hZJKQzjV9uMN8bioV5D9ABUgl6hBNuXteIoPzp16rE_66x4EeYZkV9MxIRZetsTlMTVyTssIPsZBeKbcCD04P_jGZHhid5C0u5yohALSf7CX3sny2VvJyqSplbxH9vrSQnV1r3-FxqvfFzg5ruvcNBjt3vJyqpQm6P5LXqtBqLXzMgwUBUmFUXstqgA4Yv4ynZUv8s5F24iVOr__b8TdahScEk_Z8vBlsMdQlF5UZUs-_k3huwv2i7Ggpq-e8OC9vQcR2VlbgH2juqyXanfRyAR-H90WB4l9mFvTJu5G_osjM13ykr-eChAmbgNN7rXFw9k4JqbKyxcilKmBtuHO39nFwD4gRulqpMmmsrdT0xI6VBt_6Kxec_DgiwmIWvFjEzDII6zo-Fe8xZ3gKK5KUAQjIUNkig9KsVoUfkrfkEnSBUu4qG6ovzpnPkRab-rjhrU5E4Ehntq96DI9FYgIuJ74cj2kFQt-JX7FkbEhfgJilh0EcYmTwL9JMBgf0XcyfHLspFhSTZR44dqepYBm86aCD3MVj3bTKIYvUeASj6URH63k1MXM4MwoDq7019jVjxRQB6lt4
                     </token>
                     <createBuildSessionId>true</createBuildSessionId>
-                    <appName>sl-web-calculator2</appName>
+                    <appName>sl-web-calculator</appName>
                     <workspacepath>${project.build.outputDirectory}</workspacepath>
                     <build>${sl.build}</build>
                     <branch>master</branch>
@@ -38,10 +42,6 @@
                     <logLevel>WARN</logLevel>
                     <logFolder>/tmp</logFolder>
                     <includeResources>true</includeResources>
-                    <testListenerJar>/home/kamil/workspace/sealights/projects/web-calculator/sl-test-listener.jar
-                    </testListenerJar>
-                    <buildScannerJar>/home/kamil/workspace/sealights/projects/web-calculator/sl-build-scanner.jar
-                    </buildScannerJar>
                 </configuration>
                 <executions>
                     <execution>
