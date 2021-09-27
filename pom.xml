@@ -14,76 +14,86 @@
     </modules>
     <packaging>pom</packaging>
 
-        <properties>
-            <maven.compiler.source>1.8</maven.compiler.source>
-            <maven.compiler.target>1.8</maven.compiler.target>
-        </properties>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>sl</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.sealights.on-premise.agents.plugin</groupId>
+                        <artifactId>sealights-maven-plugin</artifactId>
+                        <version>2.1.660</version>
+                        <configuration>
+                            <token>
+                                eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL0RFVi1waW90ci5hdXRoLnNlYWxpZ2h0cy5pby8iLCJqd3RpZCI6IkRFVi1waW90cixpLTBmZDg4N2QzNzVjMzBkODhhLEFQSUdXLWIwNTRlY2FmLTViMGQtNDQxOS05ZDA4LTg0OTI2NWE3YWI4MSwxNjMyMzkxODY3MTM5Iiwic3ViamVjdCI6IlNlYUxpZ2h0c0BhZ2VudCIsImF1ZGllbmNlIjpbImFnZW50cyJdLCJ4LXNsLXJvbGUiOiJhZ2VudCIsIngtc2wtc2VydmVyIjoiaHR0cHM6Ly9kZXYtcGlvdHItZ3cuZGV2LnNlYWxpZ2h0cy5jby9hcGkiLCJzbF9pbXBlcl9zdWJqZWN0IjoiIiwiaWF0IjoxNjMyMzkxODY3fQ.WZi1uswqailUhvZkO_qydOfU8qpOmsUYVN_graR5UtM0pLIEL59IkRZ_otgNNVHc0L4C7NiTw8lRuB97pkTtm1mJVLJxu3E73Qt7KgfrOyud03bHZHRn5gBQTO2E-fmmZf1XM5DYErSvq9PoaG0TbaEctBebFjQi2Nr1avSyg3tX7ysHXayV3gU5cXsLpa6eZkjDvyfxtDcBs7ZzHtxAutb8azfAwqYs9NEw0njQxp89Hf6j_3bhP5_c03VcnWJI629DUYX88CNNJZgmIrPbRH7o7mNEDdfEOP2nm9Tg4YMD1mpoW31n34cvMIIld23Kvk2jd-ceqqz5c-Y4RWcuDekHIOAYTf2F7THhDooEZAxY1JZ567-9x8ofqtLeQ9225PeHPr_z4Lf9vMBqG9pjvoL1dPczmWURAWfEUPeF5Ugk4YKWGdSp4s6MWCcZIpY5r0vh_TvwHuLWol-QE_Mm95RbwMoSnfH6B80dWlLSQ330egyooSRnZVc8hBt3MEGEmGt9ya9XBnAZVmnI8tcZAQqJST6x_i7GkocJCmLKN0fx00rdPHOGuH7DrA8ttsLTWMbgbV1uS78aC2ANXAcqx1T7N-2FCeHPy3D25TiCgFejmNpHTxcCEtObzDezOyDbsMH1dWKU7vSDRKa7sD7H06AyBpxv5TVTOx5YnT7bV0k
+                            </token>
+                            <createBuildSessionId>true</createBuildSessionId>
+                            <appName>kamil-best-app-ever</appName>
+                            <workspacepath>${project.build.outputDirectory}</workspacepath>
+                            <build>SL_Timestamp</build>
+                            <branch>master</branch>
+                            <packagesincluded>io.sl.*</packagesincluded>
+                            <filesincluded>*.class</filesincluded>
+                            <filesStorage>/tmp</filesStorage>
+                            <testStage>Unit Tests</testStage>
+                            <filesexcluded>*test-classes*</filesexcluded>
+                            <logLevel>WARN</logLevel>
+                            <logFolder>/tmp</logFolder>
+                            <includeResources>true</includeResources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>a1</id>
+                                <goals>
+                                    <goal>build-scanner</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>a2</id>
+                                <goals>
+                                    <goal>test-listener</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>a3</id>
+                                <goals>
+                                    <goal>prepare-test-listener</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.18.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <argLine>@{sealightsArgLine} -Dsl.testStage="Integration Tests" -Dsl.tia.useModuleName=true</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>io.sealights.on-premise.agents.plugin</groupId>
-                <artifactId>sealights-maven-plugin</artifactId>
-                <version>2.1.660</version>
-                <configuration>
-                    <token>
-                        eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL0RFVi1rYW1pbC5hdXRoLnNlYWxpZ2h0cy5pby8iLCJqd3RpZCI6IkRFVi1rYW1pbCxpLTA1NTkxZWIzNmVlMmZkNzMyLEFQSUdXLTFjMDFmY2Y2LTM2ZjItNGNkZi1hNzUzLTQ2MzY4YjI3YTRhNCwxNjI5ODk0NTY4Mjk3Iiwic3ViamVjdCI6IlNlYUxpZ2h0c0BhZ2VudCIsImF1ZGllbmNlIjpbImFnZW50cyJdLCJ4LXNsLXJvbGUiOiJhZ2VudCIsIngtc2wtc2VydmVyIjoiaHR0cHM6Ly9ERVYta2FtaWwtZ3cuZGV2LnNlYWxpZ2h0cy5jby9hcGkiLCJzbF9pbXBlcl9zdWJqZWN0IjoiIiwiaWF0IjoxNjI5ODk0NTY4fQ.X3yhXM3dfzSAJokmlabLiLPm3HXf06VXNwGz1KleagzKM3jneH3Y0ChedXBHkqqhiONdDhVJs9-APnQs2b_j82Jj-9XcPOZ5N5hZJKQzjV9uMN8bioV5D9ABUgl6hBNuXteIoPzp16rE_66x4EeYZkV9MxIRZetsTlMTVyTssIPsZBeKbcCD04P_jGZHhid5C0u5yohALSf7CX3sny2VvJyqSplbxH9vrSQnV1r3-FxqvfFzg5ruvcNBjt3vJyqpQm6P5LXqtBqLXzMgwUBUmFUXstqgA4Yv4ynZUv8s5F24iVOr__b8TdahScEk_Z8vBlsMdQlF5UZUs-_k3huwv2i7Ggpq-e8OC9vQcR2VlbgH2juqyXanfRyAR-H90WB4l9mFvTJu5G_osjM13ykr-eChAmbgNN7rXFw9k4JqbKyxcilKmBtuHO39nFwD4gRulqpMmmsrdT0xI6VBt_6Kxec_DgiwmIWvFjEzDII6zo-Fe8xZ3gKK5KUAQjIUNkig9KsVoUfkrfkEnSBUu4qG6ovzpnPkRab-rjhrU5E4Ehntq96DI9FYgIuJ74cj2kFQt-JX7FkbEhfgJilh0EcYmTwL9JMBgf0XcyfHLspFhSTZR44dqepYBm86aCD3MVj3bTKIYvUeASj6URH63k1MXM4MwoDq7019jVjxRQB6lt4
-                    </token>
-                    <createBuildSessionId>true</createBuildSessionId>
-                    <appName>sl-web-calculator</appName>
-                    <workspacepath>${project.build.outputDirectory}</workspacepath>
-                    <build>${sl.build}</build>
-                    <branch>master</branch>
-                    <packagesincluded>io.sl.*</packagesincluded>
-                    <filesincluded>*.class</filesincluded>
-                    <filesStorage>/tmp</filesStorage>
-                    <testStage>Unit Tests</testStage>
-                    <filesexcluded>*test-classes*</filesexcluded>
-                    <logLevel>WARN</logLevel>
-                    <logFolder>/tmp</logFolder>
-                    <includeResources>true</includeResources>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>a1</id>
-                        <goals>
-                            <goal>build-scanner</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>a2</id>
-                        <goals>
-                            <goal>test-listener</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>a3</id>
-                        <goals>
-                            <goal>prepare-test-listener</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <argLine>@{sealightsArgLine} -Dsl.testStage="Integration Tests" -Dsl.tia.useModuleName=true</argLine>
-                </configuration>
+                <version>2.18.1</version>
             </plugin>
         </plugins>
     </build>

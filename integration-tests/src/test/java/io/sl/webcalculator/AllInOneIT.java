@@ -1,39 +1,43 @@
 package io.sl.webcalculator;
 
+import okhttp3.*;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {SubtractingController.class, AddingController.class})
-@RunWith(SpringRunner.class)
-@EnableAutoConfiguration
 public class AllInOneIT {
 
-    @LocalServerPort
-    private int port;
-    @Autowired
-    private TestRestTemplate restTemplate;
+    private static final OkHttpClient client = new OkHttpClient.Builder().build();
 
     @Test
-    public void shouldRunTwoControllers() throws MalformedURLException {
-        ResponseEntity<Integer> addingResponse = restTemplate.getForEntity(
-                new URL("http://localhost:" + port + "/add/1/2").toString(), Integer.class);
+    public void shouldRunTwoApps() throws Exception {
+        AddingApplication addingApplication = new AddingApplication(8881);
+        addingApplication.start();
 
-        ResponseEntity<Integer> subtractingResponse = restTemplate.getForEntity(
-                new URL("http://localhost:" + port + "/subtract/1/2").toString(), Integer.class);
+        SubtractingApplication subtractingApplication = new SubtractingApplication(8882);
+        subtractingApplication.start();
 
-        assertEquals(Integer.valueOf(3), addingResponse.getBody());
-        assertEquals(Integer.valueOf(-1), subtractingResponse.getBody());
+        Request addingRequest = new Request.Builder()
+                .url(String.format("http://localhost:%d/add?a=%d&b=%d", 8881, 2, 4))
+                .build();
+
+        Request subtractingRequest = new Request.Builder()
+                .url(String.format("http://localhost:%d/subtract?a=%d&b=%d", 8882, 2, 4))
+                .build();
+
+        Call addingCall = client.newCall(addingRequest);
+        Call subtractingCall = client.newCall(subtractingRequest);
+
+        assertEquals(6, extractIntResult(addingCall.execute()));
+        assertEquals(-2, extractIntResult(subtractingCall.execute()));
+
+        subtractingApplication.stop();
+        addingApplication.stop();
+    }
+
+    private int extractIntResult(Response response) throws IOException {
+        return Integer.parseInt(response.body().string());
     }
 }
